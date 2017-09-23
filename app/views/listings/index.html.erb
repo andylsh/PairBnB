@@ -11,9 +11,7 @@
 	< link_to tag.name, tag_path(tag.name) >
 < end >
  -->
-<div class="row">
   <% @listings.each do |listing| %>
-  	<div class="col-md-4">
 			Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
 			Description: <%= listing.description %> <br>
 			Property Type: <%= listing.property_type %> <br>
@@ -31,10 +29,8 @@
 				BOOK NOW<br><br>
 			<% end %>	
 		
-	</div>
-</div>
 
-<!-- < will_paginate @pages > -->
+<%= will_paginate @listings %>
 
 
 	<%= link_to "Create", new_listing_path %>
