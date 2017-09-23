@@ -1,7 +1,10 @@
 class ListingsController < ApplicationController
-	def index
+	
+  def index
     if params[:tags]
       @listings = Listing.tagged_with(params[:tag])
+   elsif params[:search]
+      @listings = Listing.search(params[:search])
     else
       @listings = Listing.all
       # Listing.order("title").paginate(:page => params[:page], :per_page => 30)
