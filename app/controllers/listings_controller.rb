@@ -33,7 +33,7 @@ class ListingsController < ApplicationController
       		if listing_params
       			@listing.update(listing_params)
       			flash[:success] = "Add Successfully"
-        		redirect_to new_listing_path
+        		redirect_to listings_path
     		else
       			@listing.update(verification: true)
       			redirect_to listings_path
