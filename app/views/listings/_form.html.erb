@@ -1,0 +1,78 @@
+<%= form_for @listing do |form| %>
+    <div class="text-field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+   <div class="text-field">
+    <%= form.label "Property Type" %>
+    <%= form.select(:property_type, options_for_select([['HOUSE', 'HOUSE'],['ENTIRE FLOOR', 'ENTIRE FLOOR'],['CONDOMINIUM', 'CONDOMINIUM'],['VILLA', 'VILLA'],['TOWNHOUSE', 'TOWNHOUSE'],['CASTLE','CASTLE'],['TREEHOUSE', 'TREEHOUSE'],['HUT', 'HUT'], ['OTHER', 'OTHER']])) %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :room_number, "Number of Room" %>
+    <%= form.number_field :room_number %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :bed_number, "Number of Bed" %>
+    <%= form.number_field :bed_number %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :guest_number, "Number of Guest" %>
+    <%= form.number_field :guest_number %>
+  </div>
+
+
+  <div class="text-field">
+    <%= form.label :address, "Street Address" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :state %>
+    <%= form.select(:state, options_for_select([['SELANGOR', 'SELANGOR'],['KL', 'KL'],['P.PENANG', 'P.PENANG'],['KEDAH', 'KEDAH'],['SABAH', 'SABAH'],['TERENGGANU','TERENGGANU'],['PERAK', 'PERAK'],['PERLIS', 'PERLIS'],['PAHANG', 'PAHANG'],['N.SEMBILAN', 'N.SEMBILAN'],['JOHOR', 'JOHOR'], ['SARAWAK', 'SARAWAK']])) %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :postcode %>
+    <%= form.text_field :postcode %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :price, "Price per day" %>
+    <%= form.text_field :price %>
+  </div>
+
+ 
+  <div class="text-field">
+    <%= form.label :tag_list, "Tags:" %>
+    <%= check_box_tag "listing[tag_list][]", 'Smoker' %>
+    <%= label_tag "listing[tag_list]", "Smoker" %>
+    <%= check_box_tag "listing[tag_list][]", 'Non-smoker'%>
+    <%= label_tag "listing[tag_list]", "Non-smoker" %>
+    <%= check_box_tag"listing[tag_list][]", 'Pets' %>
+    <%= label_tag "listing[tag_list]", "Pets" %>
+    <%= check_box_tag "listing[tag_list][]", 'Cooking allowed' %>
+    <%= label_tag "listing[tag_list]", "Cooking allowed" %>
+  </div>
+  
+  <!-- <div class="text-field">
+    < form.label :photos >
+    < form.file_field :photos >
+  </div> -->
+  
+
+  <div class="submit-field">
+    <%= form.submit %>
+  </div>
+
+  
+<% end %>
+ 

@@ -1,0 +1,19 @@
+ <% @listings.each do |listing| %>
+  	<div class="col-md-4">
+		Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
+			Description: <%= listing.description %> <br>
+			Property Type: <%= listing.property_type %> <br>
+			No. of Rooms<%= listing.room_number %> <br>
+			No. of Beds<%= listing.bed_number %> <br>
+			No. of guests: <%= listing.guest_number %> <br>
+			Street Address: <%= listing.address %> <br>
+			State: <%= listing.state %> <br>
+			Postcode: <%= listing.postcode %> <br>
+			Price: <%= listing.price %> <br>
+			Tags: <%= raw listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> <br>
+			Host: <%= listing.user.full_name %> <br>
+		<%= link_to 'Edit', edit_listing_path(listing) %> <br>
+		<%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+		Book Now<br><br>
+	</div>
+  <% end %>
