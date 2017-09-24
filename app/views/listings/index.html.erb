@@ -7,7 +7,7 @@
 	</div>
 
 	<div class= "form-group">
-		<% tag_cloud Listing.tag_counts, %w[l] do |tag| %>
+		<% tag_cloud Listing.tag_counts, %w[] do |tag| %>
 			<%= link_to tag.name, tag_path(tag.name) %>
 		<% end %>
 	</div>
@@ -21,12 +21,23 @@
 					Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
 					Price: <%= listing.price %> <br>
 					Tags: <%= raw listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> <br>
+					State: <%= listing.state %> <br>
 					Hosted by: <%= listing.user.full_name %> <br>
 					<div class="text-center">
-						<%= link_to 'Edit', edit_listing_path(listing)%>
-						| <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %> <br>
-						 <br>
-					 <%= link_to 'Book Now', new_listing_path ,class: "btn btn-success" %>
+					 	<% if listing.user_id == current_user.id %>
+							<p><%= link_to 'Edit', edit_listing_path(listing) %>
+							| <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+						 <% else %>
+						 	<p> Edit | Delete </p> 
+						 <% end %>
+					 	<%= link_to 'Book Now', new_listing_path ,class: "btn btn-success form-control" %>
+					 	<br>
+					 	<br>
+					 	<% if !current_user.customer? && listing.verification ==false %>
+					 		<%= button_to "Verify", listing_path(listing), :method => :put %>
+					 	<% else %>
+					 		<button type="button" class="btn-disabled">Verified</button>
+					 	<% end %>
 					</div>
 				
 					</div>
