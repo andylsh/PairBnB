@@ -8,7 +8,7 @@ class UsersController < Clearance::UsersController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-	      redirect_to root_path
+	      redirect_to listings_path
 	    else
 	      flash[:failure]= @user.errors.full_messages
 	      redirect_to sign_up_path
@@ -34,7 +34,9 @@ class UsersController < Clearance::UsersController
     	render "users/new"
     end
 
+
+
 	def user_params
-    	params.require(:user).permit(:full_name, :email, :password)
+    	params.require(:user).permit(:full_name, :email, :password, :photo)
   	end
 end

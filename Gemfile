@@ -43,6 +43,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'faker'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave' #required github: blah blah
+gem "mini_magick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
