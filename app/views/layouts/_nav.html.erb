@@ -25,9 +25,15 @@
 
         <% else %>
         <li><%= link_to "Create Listing", new_listing_path %></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.full_name %> <span class="caret"></span></a>
+        <% if current_user.photo.nil? %>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= image_url("") %> <span class="caret"></span></a>
           <ul class="dropdown-menu">
+        <% else %>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag current_user.photo.to_s, class: "img-rounded" %> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+        <% end %>
             <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>

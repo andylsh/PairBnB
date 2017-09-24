@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/carrierwaveuploader/carrierwave.git
+  revision: c0ae645fe8c0dc9169b312eb84cd963d79885e77
+  specs:
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -94,6 +103,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_magick (4.8.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.2)
@@ -184,6 +194,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   bootstrap-sass (~> 3.3, >= 3.3.6)
   byebug
+  carrierwave!
   clearance
   coffee-rails (~> 4.2)
   faker
@@ -192,6 +203,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  mini_magick
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.1)
