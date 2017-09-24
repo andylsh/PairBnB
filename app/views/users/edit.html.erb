@@ -6,11 +6,8 @@
       <%= render partial: '/users/form', object: form %>
 
       <div class="submit-field form-group">
-        <%= form.submit "Update", class: "btn btn-default" %>
-      </div>
-
-      <div class="submit-field form-group">
-        <%= form.submit "Delete", class: "btn btn-default"%>
+        <%= form.submit "Update", class: "btn btn-primary" %>
+        <%= form.submit "Delete", class: "btn btn-danger"%>
       </div>
 
     <% end %>
