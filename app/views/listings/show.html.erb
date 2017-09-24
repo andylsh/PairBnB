@@ -7,9 +7,9 @@
 			</div>
 
 			<div class="col-md-4">
-				<h3>Project Description</h3>
+				<h2>Project Description</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-				<h3>Project Details</h3>
+				<h2>Project Details</h2>
 					<ul>
 					<li>Lorem Ipsum</li>
 					<li>Dolor Sit Amet</li>
@@ -20,7 +20,7 @@
 
 		</div><!-- /.row -->
 		
-	<h3>Related Projects</h3>
+	<h2>Related Projects</h2>
 
 		<div class="row">
 
@@ -50,7 +50,14 @@
 
 
 		</div>
-
+	
+	<div class="text-center">
+		<!-- < link_to 'Edit', edit_listing_path(listing)> --> edit
+		 | <!--< link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } >  -->delete
+	</div>
 			
 	<%= link_to 'Back', listings_path ,class: "btn btn-default" %>
+	<div class="book-now">
+		<%= link_to 'Book Now', new_listing_path ,class: "btn btn-success" %>
+	</div>
 </div><!-- /.container -->
