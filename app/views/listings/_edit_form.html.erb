@@ -12,7 +12,7 @@
    <div class="form-group">
     <%= form.label "Property Type" %>
     <div class= "dropdown-toggle">
-      <%= form.select(:property_type, options_for_select([['HOUSE', 'HOUSE'],['ENTIRE FLOOR', 'ENTIRE FLOOR'],['CONDOMINIUM', 'CONDOMINIUM'],['VILLA', 'VILLA'],['TOWNHOUSE', 'TOWNHOUSE'],['CASTLE','CASTLE'],['TREEHOUSE', 'TREEHOUSE'],['HUT', 'HUT'], ['OTHER', 'OTHER']]))%>
+      <%= form.select(:property_type, options_for_select([[@listing.property_type, @listing.property_type], ['HOUSE', 'HOUSE'],['ENTIRE FLOOR', 'ENTIRE FLOOR'],['CONDOMINIUM', 'CONDOMINIUM'],['VILLA', 'VILLA'],['TOWNHOUSE', 'TOWNHOUSE'],['CASTLE','CASTLE'],['TREEHOUSE', 'TREEHOUSE'],['HUT', 'HUT'], ['OTHER', 'OTHER']]))%>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
   <div class="form-group">
     <%= form.label :state %>
     <div class="dropdown-toggle">
-      <%= form.select(:state, options_for_select([['JOHOR', 'JOHOR'],['KEDAH', 'KEDAH'],['KELANTAN', 'KELANTAN'],['KL', 'KL'],['MELAKA', 'MELAKA'],['N.SEMBILAN','N.SEMBILAN'],['P.PENANG', 'P.PENANG'],['PERAK', 'PERAK'],['PERLIS', 'PERLIS'],['SABAH', 'SABAH'],['SARAWAK', 'SARAWAK'], ['SELANGOR', 'SELANGOR'], ['TERENGGANU', 'TERENGGANU']])) %>
+      <%= form.select(:state, options_for_select([[@listing.state, @listing.state], ['JOHOR', 'JOHOR'],['KEDAH', 'KEDAH'],['KELANTAN', 'KELANTAN'],['KL', 'KL'],['MELAKA', 'MELAKA'],['N.SEMBILAN','N.SEMBILAN'],['P.PENANG', 'P.PENANG'],['PERAK', 'PERAK'],['PERLIS', 'PERLIS'],['SABAH', 'SABAH'],['SARAWAK', 'SARAWAK'], ['SELANGOR', 'SELANGOR'], ['TERENGGANU', 'TERENGGANU']])) %>
     </div>
   </div>
   
@@ -50,7 +50,7 @@
   </div>
 
   <%= form.label :price, "Price per day" %>
-  <div class="input-group form-group">
+  <div class="input-group">
     <%= form.text_field :price, class: "form-control" %>
     <span class="input-group-addon">.00</span>
   </div>
@@ -78,6 +78,4 @@
     <%= form.submit "Create", class: "btn btn-success" %>
   </div>
 
-  
 <% end %>
- 

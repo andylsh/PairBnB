@@ -5,9 +5,9 @@ class ListingsController < ApplicationController
     if params[:tags]
       @listings = Listing.tagged_with(params[:tag])
    elsif params[:search]
-      @listings = Listing.search(params[:search]).page(params[:page]).per_page(9)
+      @listings = Listing.search(params[:search]).page(params[:page]).per_page(6)
     else
-      @listings = Listing.order("title").page(params[:page]).per_page(9)
+      @listings = Listing.order("title").page(params[:page]).per_page(6)
       # Listing.order("title").paginate(:page => params[:page], :per_page => 30)
     end
   end
@@ -19,7 +19,7 @@ class ListingsController < ApplicationController
   	def create
 	    @listing = current_user.listings.new(listing_params)
 	    if @listing.save
-	      @listings = Listing.order("title").page(params[:page]).per_page(9)
+	      @listings = Listing.order("title").page(params[:page]).per_page(6)
 	      redirect_to listings_path	
 	    else
 	      flash[:failure]= "Failed"
@@ -46,7 +46,7 @@ class ListingsController < ApplicationController
     end
 
     def show
-    	@listing = Listing.find(params[:id])
+    	@listings = Listing.find_by(user_id: current_user.id, id: params[:id] )
     end
 
      def destroy

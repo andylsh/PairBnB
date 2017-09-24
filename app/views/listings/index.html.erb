@@ -1,36 +1,46 @@
-<%= form_tag(listings_path, method: "get") do %>
-  <%= label_tag( "Search for:") %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag("Search") %>
-<% end %>
-	
+<div class="container">
+	<div class="text-center form-inline">
+		<%= form_tag(listings_path, method: "get") do %>
+			<%= text_field_tag :search, params[:search], class: "form-control" %>
+			<%= submit_tag("Search", class: "btn btn-default") %>
+		<% end %>
+	</div>
 
-<h1> Listing </h1>
+	<div class= "form-group">
+		<% tag_cloud Listing.tag_counts, %w[l] do |tag| %>
+			<%= link_to tag.name, tag_path(tag.name) %>
+		<% end %>
+	</div>
 
-<!-- < tag_cloud Listing.tag_counts, %w[] do |tag| >
-	< link_to tag.name, tag_path(tag.name) >
-< end >
- -->
-  <% @listings.each do |listing| %>
-			Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
-			Description: <%= listing.description %> <br>
-			Property Type: <%= listing.property_type %> <br>
-			No. of Rooms<%= listing.room_number %> <br>
-			No. of Beds<%= listing.bed_number %> <br>
-			No. of guests: <%= listing.guest_number %> <br>
-			Street Address: <%= listing.address %> <br>
-			State: <%= listing.state %> <br>
-			Postcode: <%= listing.postcode %> <br>
-			Price: <%= listing.price %> <br>
-			Tags: <%= raw listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> <br>
-			Host: <%= listing.user.full_name %> <br>
-				<%= link_to 'Edit', edit_listing_path(listing) %> <br>
-				<%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %><br>
-				BOOK NOW<br><br>
-			<% end %>	
-		
+	<div class="row">
+		<% @listings.each do |listing| %>
+			<div class="col-md-4">
+				<div class="thumbnail">
+	            <img src="http://placehold.it/500x250/EEE">
+              		<div class="caption">
+					Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
+					Price: <%= listing.price %> <br>
+					Tags: <%= raw listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> <br>
+					Hosted by: <%= listing.user.full_name %> <br>
+					<div class="text-center">
+						<%= link_to 'Edit', edit_listing_path(listing)%>
+						| <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %> <br>
+						 <br>
+					 <%= link_to 'Book Now', new_listing_path ,class: "btn btn-success" %>
+					</div>
+				
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
 
-<%= will_paginate @listings %>
+	<div class="text-center">
+		<%= will_paginate @listings %>
+		<br>
+		<%= link_to "Create Listing", new_listing_path, class: "btn btn-success" %>
+	</div>
+
+</div>
 
 
-	<%= link_to "Create", new_listing_path %>

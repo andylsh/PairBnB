@@ -1,3 +1,14 @@
-// Place all the styles related to the listings controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.img-position {
+   display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.428571429;
+}
+
+.img-position > img, .img-position a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
