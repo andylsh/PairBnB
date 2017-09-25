@@ -68,10 +68,10 @@
     <%= label_tag "listing[tag_list]", "Cooking allowed" %>
   </div>
   
-  <!-- <div class="text-field">
-    < form.label :photos >
-    < form.file_field :photos >
-  </div> -->
+    <div class="form-group">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
   
 
   <div class="submit-field form-group">

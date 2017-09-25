@@ -92,7 +92,7 @@ class ListingsController < ApplicationController
 
   	def listing_params
   		if params[:listing]
-    		params.require(:listing).permit(:title, :description, :property_type, :room_number, :bed_number, :guest_number, :address, :state, :postcode, :price, tag_list: [])
+    		params.require(:listing).permit(:title, :description, :property_type, :room_number, :bed_number, :guest_number, :address, :state, :postcode, :price, tag_list: [], images: [])
   		end
   	end
 
