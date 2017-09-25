@@ -16,7 +16,11 @@
 		<% @listings.each do |listing| %>
 			<div class="col-md-4">
 				<div class="thumbnail">
-	            <img src="http://placehold.it/500x250/EEE">
+				<% if listing.images.empty? %>
+	            	<img src="http://placehold.it/500x250/EEE">
+	            <% else %>
+	            	<%=  image_tag listing.images.first.small_thumb.url %>
+	            <% end %>
               		<div class="caption">
 					Title: <%= link_to listing.title, user_listing_path(current_user, listing) %> <br>
 					Price: <%= listing.price %> <br>
@@ -49,7 +53,7 @@
 	<div class="text-center">
 		<%= will_paginate @listings %>
 		<br>
-		<%= link_to "Create Listing", new_listing_path, class: "btn btn-success" %>
+		<%= link_to "Create Listing", new_listing_path, class: "btn btn-success" if !current_user.moderator? %>
 	</div>
 
 </div>

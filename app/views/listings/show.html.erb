@@ -3,7 +3,45 @@
 		<div class="row">
 
 			<div class="col-md-8">
-				<img class="img-fluid" src="http://placehold.it/750x500" alt="">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				  </ol>
+
+				   <div class="carousel-inner">
+				   <% if @listing.images.empty? %>
+				   <div class="item active">
+				      <img class="img-fluid" src="http://placehold.it/750x400" alt="">
+				    </div>
+				    <div class="item">
+				      <img class="img-fluid" src="http://placehold.it/750x400" alt="">
+				    </div>
+				    <div class="item">
+				      <img class="img-fluid" src="http://placehold.it/750x400" alt="">
+				    </div>
+				    <% else %>
+				    <div class="item active">
+				      <%=  image_tag @listing.images.first.thumb.url, class: "img-fluid" %>
+				    </div>
+				   <% @listing.images.each do |image| %>
+				    <div class="item">
+				      <%= image_tag image.thumb.url, class: "img-fluid" %>
+				    </div>
+				   <% end %>
+				    <%end %>
+				  </div>
+
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left"></span>
+				  </a>
+				  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right"></span>
+				  </a>
+				</div>
 			</div>
 			<div class="col-md-4">
 				<h2>Project Description</h2>
@@ -26,32 +64,43 @@
 	<h2>Related Projects</h2>
 
 		<div class="row">
-
+		<% if @listing.images.empty? %>
 			<div class="col-md-4">
 				<div class="img-position">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<div class="img-position">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<div class="img-position">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
+				</div>
+			</div>
+		<% else %>
+			<div class="col-md-4">
+				<div class="img-position">
+					<%=  image_tag @listing.images.first.small_thumb.url %>
 				</div>
 			</div>
 
+			<div class="col-md-4">
+				<div class="img-position">
+					<%=  image_tag @listing.images.second.small_thumb.url %>
+				</div>
+			</div>
 
+			<div class="col-md-4">
+				<div class="img-position">
+					<%=  image_tag @listing.images.third.small_thumb.url %>
+				</div>
+			</div>
+			<% end %>
 		</div>
 	
 	<div class="text-center">
@@ -68,3 +117,4 @@
 		<%= link_to 'Book Now', new_listing_path ,class: "btn btn-success" %>
 	</div>
 </div><!-- /.container -->
+
