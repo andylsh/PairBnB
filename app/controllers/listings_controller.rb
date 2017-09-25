@@ -77,7 +77,7 @@ class ListingsController < ApplicationController
     end
 
     def show
-    	@listings = Listing.find_by(user_id: current_user.id, id: params[:id] )
+    	 @listing = Listing.find(params[:id])
     end
 
      def destroy
