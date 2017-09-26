@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
 	belongs_to :user
+	has_many :reservations
 	acts_as_taggable # Alias for acts_as_taggable_on :tags
 	serialize :images, Array
 	mount_uploaders :images, ImageUploader
