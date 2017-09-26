@@ -61,64 +61,9 @@
 			</div>
 
 		</div><!-- /.row -->
-		
-	<h2>Related Projects</h2>
 
-		<div class="row">
-		<% if @listing.images.empty? %>
-			<div class="col-md-4">
-				<div class="img-position">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="img-position">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="img-position">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</div>
-			</div>
-		<% else %>
-			<div class="col-md-4">
-				<div class="img-position">
-					<%=  image_tag @listing.images.first.small_thumb.url %>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="img-position">
-					<%=  image_tag @listing.images.second.small_thumb.url %>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="img-position">
-					<%=  image_tag @listing.images.third.small_thumb.url %>
-				</div>
-			</div>
-			<% end %>
 		</div>
-	
-	<div class="text-center">
-		<% if @listing.user_id == current_user.id %>
-			<%= link_to 'Edit', edit_listing_path(@listing) %> 
-			 | <%= link_to 'Delete', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' } %>
-		<% else %>
-			<p> Edit | Delete </p>
-		<% end %> 
-	</div>
-			
-	<%= link_to 'Back', listings_path ,class: "btn btn-default" %>
-	<div class="book-now">
-		<% if current_user.customer? || current_user.superadmin? %> 
-			<%= link_to 'Book', new_listing_path ,class: "btn btn-success" %>
-		<% else %>
-			<button type="button" class="btn-disabled">Book</button>
-		<% end %>
-	</div>
-</div><!-- /.container -->
+		<div class="text-center">
+			<%= render partial: '/reservations/form' %>
+		</div>
+</div>	

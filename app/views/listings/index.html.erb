@@ -34,9 +34,15 @@
 						 <% else %>
 						 	<p> Edit | Delete </p> 
 						 <% end %>
-					 	<%= link_to 'Book Now', new_listing_path ,class: "btn btn-success form-control" %>
-					 	<br>
-					 	<br>
+						<% if current_user.customer? || current_user.superadmin? %> 
+						 	<%= link_to 'Book Now',  new_listing_reservation_path(listing) ,class: "btn btn-success form-control" %>
+						 	<br>
+						 	<br>
+					 	<% else %>
+					 		<button type="button" class="btn-disabled">Book Now</button>
+						 	<br>
+						 	<br>
+					 	<% end %>
 					 	<% if !current_user.customer? && listing.verification ==false %>
 					 		<%= button_to "Verify", listing_path(listing), :method => :put %>
 					 	<% else %>
