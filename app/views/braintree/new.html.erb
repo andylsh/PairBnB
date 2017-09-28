@@ -1,0 +1,27 @@
+<div class="demo-frame">
+
+      <%= form_for :checkout_form, url: braintree_checkout_path(user_id: params[:user_id], listing_id: params[:listing_id], start_date: params[:start_date], end_date: params[:end_date], guest_no: params[:guest_no], reservation_id: params[:reservation_id]) ,html: { id: "cardForm"} do |form| %>
+
+        <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+        <div id="card-number" class="hosted-field"></div>
+
+        <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
+        <div id="expiration-date" class="hosted-field"></div>
+
+        <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
+        <div id="cvv" class="hosted-field"></div>
+
+        <div id="token" data-myval="<%= @client_token %>"></div>  <!-- To pass ruby code to javascript -->
+
+        <%= form.hidden_field "payment_method_nonce" %>
+
+        <%= form.hidden_field :id %>
+
+        <div class="button-container">
+          <%= form.submit "Purchase", disabled: true, class: "button btn-primary", id: "submit-payment-btn" %>
+        </div>
+      <% end %>
+</div>
+
+
+

@@ -13,26 +13,26 @@ class ListingsController < ApplicationController
 	
     def index
         if current_user.superadmin?
-          if params[:search].nil?
+          if params[:tag]
+            @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6) 
+          elsif params[:search].nil?
             @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6)
-          elsif params[:tag]
-            @listings = Listing.tagged_with(params[:tag])
           else
             @listings = Listing.search(params[:search]).page(params[:page]).per_page(6)
           end
         elsif current_user.moderator?
-          if params[:search].nil?
+          if params[:tag]
+            @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: false)
+          elsif params[:search].nil?
             @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: false)
-          elsif params[:tag]
-            @listings = Listing.tagged_with(params[:tag]).where(verification: false)
           else
             @listings = Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: false)
           end
           elsif
-            if params[:search].nil?
+            if params[:tag]
+              @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: true)
+            elsif params[:search].nil?
               @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: true)
-            elsif params[:tag]
-              @listings = Listing.tagged_with(params[:tag]).where(verification: true)
             else
               @listings =  Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: true)
             end
@@ -47,7 +47,7 @@ class ListingsController < ApplicationController
         @listing = current_user.listings.new(listing_params)
         if @listing.save
           @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6)
-          redirect_to listings_path 
+          redirect_to listings_path, notice: "Successfuly created" 
         else
           redirect_to new_listing_path, notice: "Failed to add listings"
         end

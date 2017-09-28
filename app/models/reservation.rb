@@ -1,6 +1,9 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :listing
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :guest_no, presence: true, numericality: { only_integer: true}
   validate :check_overlapping_dates
   validate :check_max_guests
   validate :check_owner
@@ -31,7 +34,7 @@ class Reservation < ApplicationRecord
 
   def total_price
     price = listing.price
-    num_dates = (start_date..end_date).to_a.length
+    num_dates = (start_date..end_date).to_a.length - 1
     return price * num_dates
   end 
 

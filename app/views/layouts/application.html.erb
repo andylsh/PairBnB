@@ -5,16 +5,20 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
 </head>
 <body>
    <%= render 'layouts/nav' %>
     <div id="flash">
 	    <% flash.each do |key, value| -%>
-	      <div id="flash_<%= key %>"><%=h value %></div>
+	      <div id="flash_class<%= key %>"><%=h value %></div>
 	    <% end %>
    </div>
    <%= yield %>
+
    <%= render 'layouts/footer' %>
 </body>
 </html>

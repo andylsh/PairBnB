@@ -1,5 +1,5 @@
 class UsersController < Clearance::UsersController
-	before_action :require_login, except:[:new, :create]
+	before_action :require_login, except:[:new, :create, :edit]
 
 	def new
 		@user= User.new
@@ -22,9 +22,12 @@ class UsersController < Clearance::UsersController
 	def update
 		@user = User.find(params[:id])
 		params[:user].delete(:password) if params[:user][:password].blank?
-		if @user.update(user_params)
+		if @user.id == current_user.id
+			@user.update(user_params)
+			flash[:success]= "Congratulation updated sucessfully"
         	redirect_to edit_user_path
     	else
+    		flash[:failure]= "Failed to update"
       		redirect_to edit_user_path
     	end
 	end
@@ -34,9 +37,22 @@ class UsersController < Clearance::UsersController
     	render "users/new"
     end
 
+    def destroy
+    	@user = User.find_by_id(params[:id])
+	    if	@user.id == current_user.id
+	    	@user.destroy
+	    	flash[:success]= "Deleted successfully"
+	    	redirect_to sign_in_path
+    	else
+ 			flash[:failure]= "Failed to delete, Please try again later."
+ 			redirect_to edit_user_path
+ 		end
+    end
+
 
 
 	def user_params
     	params.require(:user).permit(:full_name, :email, :password, :photo)
   	end
 end
+

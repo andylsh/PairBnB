@@ -43,28 +43,35 @@
 				  </a>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<h2>Project Description</h2>
-				<p><%= @reservation.listing.description %></p>
+		</div>
+
+			<h2>Project Description</h2>
+			<p><%= @reservation.listing.description %></p>
+			<div class="col-md-4">	
 				<h2>Project Details</h2>
 					<ul>
-					<li class="form-group">Property Type: <%= @reservation.listing.property_type%></li>
-					<li class="form-group">Number of Rooms: <%= @reservation.listing.room_number %></li>
-					<li class="form-group">Number of Beds: <%= @reservation.listing.bed_number %></li>
-					<li class="form-group">Number of Guests: <%= @reservation.listing.guest_number %></li>
-					<li class="form-group">Street Address: <%= @reservation.listing.address %></li>
-					<li class="form-group">State: <%= @reservation.listing.state %></li>
-					<li class="form-group">Postcode: <%= @reservation.listing.postcode %></li>
-					<li class="form-group">Price: <%= @reservation.listing.price %></li>
-					<li class="form-group">Hosted by: <%= @reservation.listing.user.full_name %></li>
+						<li class="form-group">Property Type: <%= @reservation.listing.property_type%></li>
+						<li class="form-group">Number of Rooms: <%= @reservation.listing.room_number %></li>
+						<li class="form-group">Number of Beds: <%= @reservation.listing.bed_number %></li>
+						<li class="form-group">Number of Guests: <%= @reservation.listing.guest_number %></li>
+						<li class="form-group">Street Address: <%= @reservation.listing.address %></li>
+						<li class="form-group">State: <%= @reservation.listing.state %></li>
+						<li class="form-group">Postcode: <%= @reservation.listing.postcode %></li>
+						<li class="form-group">Price: <%= @reservation.listing.price %></li>
+						<li class="form-group">Hosted by: <%= @reservation.listing.user.full_name %></li>
+					</ul><br>
+				<h2> Reserved Details</h2>
+					<ul>
+						<li class="form-group">Check In: <%= @reservation.start_date.strftime('%d %B %Y') %></li>
+						<li class="form-group">Check Out: <%= @reservation.end_date.strftime('%d %B %Y') %></li>
+						<li class="form-group">Number of Guests: <%= @reservation.guest_no %></li>
+						<li class="form-group">Total Price: <%= @reservation.total_price %></li>
 					</ul>
 			</div>
 
 		</div><!-- /.row -->
-			<p>Check In: <%= @reservation.start_date.strftime('%d %B %Y') %><p>
-			<p>Check Out: <%= @reservation.start_date.strftime('%d %B %Y') %><p>
-			<p>Number of Guests: <%= @reservation.start_date %><p>
-			<p>Total Price: <%= @reservation.total_price %><p>
+		<div class="text-center">
+			<%= link_to "Back", root_path, class: "btn btn-default" %>
 		</div>
 		
 </div>

@@ -64,6 +64,16 @@
 
 		</div>
 		<div class="text-center">
-			<%= render partial: '/reservations/form' %>
-		</div>
+		<%= form_for [@listing, @reservation] do |form| %>
+			<%= render partial: '/reservations/form', object: form %>
+			<%= form.hidden_field :listing_id, value: @listing.id %> 
+
+			<div class="submit-field submit-btn ">
+	    		<%= form.submit "Submit", class: "btn btn-success" %>
+	  		</div>
+	  			<%= link_to 'Back', listings_path ,class: "btn btn-default" %>
+			</div>
+
+		<% end %>
+
 </div>	
