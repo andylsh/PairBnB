@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<% @reservations.each do |reservation| %>
+			<div class="col-md-4">
+				<div class="thumbnail">
+				<% if reservation.listing.images.empty? %>
+	            	<img src="http://placehold.it/500x250/EEE">
+	            <% else %>
+	            	<%=  image_tag reservation.listing.images.first.small_thumb.url %>
+	            <% end %>
+              		<div class="caption">
+						Title: <%= link_to reservation.listing.title, user_listing_path(current_user, reservation.listing.id) %> <br>
+						Price: <%= reservation.listing.price %> <br>
+						Tags: <%= raw reservation.listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> <br>
+						State: <%= reservation.listing.state %> <br>
+						Hosted by: <%= reservation.listing.user.full_name %><br>
+						Check In: <%= reservation.start_date.strftime('%d %B %Y') %><br>
+						Check Out: <%= reservation.end_date.strftime('%d %B %Y') %><br>
+						Total Price: <%= reservation.total_price %>
+					</div> 
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

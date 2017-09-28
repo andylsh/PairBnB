@@ -20,10 +20,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user %>
+          <li><%= link_to "Sign in with Facebook", "/auth/facebook" %></li>
           <li><%= link_to "Sign In", sign_in_path %></li>
           <li><%= link_to "Sign Up", sign_up_path %></li>
 
         <% else %>
+        <li><%= link_to "Booking", reservations_path %></li>
         <li><%= link_to "Create Listing", new_listing_path if !current_user.moderator?%></li>
         <% if current_user.photo.nil? %>
           <li class="dropdown">

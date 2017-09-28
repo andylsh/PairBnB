@@ -29,7 +29,7 @@ ActiveRecord::Base.transaction do
     listing['description'] = Faker::Hipster.sentence
     listing['property_type'] = ["HOUSE", "ENTIRE FLOOR", "CONDOMINIUM", "VILLA", "TOWNHOUSE", "CASTLE", "TREEHOUSE", "Hut", "Other"].sample
 
-    listing['room_number'] = rand(0..5)
+    listing['room_number'] = rand(1..5)
     listing['bed_number'] = rand(1..6)
     listing['guest_number'] = rand(1..10)
 
