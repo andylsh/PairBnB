@@ -1,8 +1,11 @@
 <div class="container">
 	<div class="text-center form-inline">
 		<%= form_tag(listings_path, method: "get") do %>
-			<%= text_field_tag :search, params[:search], class: "form-control" %>
+			<%= text_field_tag :state, params[:state], class: "form-control" %>
 			<%= submit_tag("Search", class: "btn btn-default") %>
+		
+			<%= range_field_tag :price, nil, {min: 100, max: 500, step: 10, value: 100} %>
+			
 		<% end %>
 	</div>
 

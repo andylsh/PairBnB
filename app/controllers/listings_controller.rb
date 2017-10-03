@@ -11,32 +11,58 @@ class ListingsController < ApplicationController
   #   end
   # end
 	
+    # def index
+    #     if current_user.superadmin?
+    #       if params[:tag]
+    #         @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6) 
+    #       elsif params[:search].nil?
+    #         @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6)
+    #       else
+    #         @listings = Listing.search(params[:search]).page(params[:page]).per_page(6)
+    #       end
+    #     elsif current_user.moderator?
+    #       if params[:tag]
+    #         @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: false)
+    #       elsif params[:search].nil?
+    #         @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: false)
+    #       else
+    #         @listings = Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: false)
+    #       end
+    #       elsif
+    #         if params[:tag]
+    #           @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: true)
+    #         elsif params[:search].nil?
+    #           @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: true)
+    #         else
+    #           @listings =  Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: true)
+    #         end
+    #     end
+    # end
+
+    # def index
+    #   @listings = Listing.all.order("created_at DESC").page(params[:page]).per_page(6).check_role(current_user)
+    #   @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).check_role(current_user) if params[:tag]
+    #   # @listings = Listing.search(params[:search]).page(params[:page]).per_page(6) if params[:search].present?
+    #   # @listings = Listing.price(params[:price]).page(params[:page]).per_page(6) if params[:price].present?
+    #     filtering_params(params).each do |key, value|
+    #         # unless key == "price" && value < 100
+    #         if key == "price" and value.to_i <= 100
+    #           value = nil
+    #         end
+    #           @listings = @listings.order("created_at DESC").public_send(key, value) if value.present?
+    #         # end
+    #    end
+    # end
+
     def index
-        if current_user.superadmin?
-          if params[:tag]
-            @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6) 
-          elsif params[:search].nil?
-            @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6)
-          else
-            @listings = Listing.search(params[:search]).page(params[:page]).per_page(6)
-          end
-        elsif current_user.moderator?
-          if params[:tag]
-            @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: false)
-          elsif params[:search].nil?
-            @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: false)
-          else
-            @listings = Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: false)
-          end
-          elsif
-            if params[:tag]
-              @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).where(verification: true)
-            elsif params[:search].nil?
-              @listings = Listing.order("created_at DESC").page(params[:page]).per_page(6).where(verification: true)
-            else
-              @listings =  Listing.search(params[:search]).page(params[:page]).per_page(6).where(verification: true)
-            end
-        end
+       if params[:tag]
+      @listings = Listing.tagged_with(params[:tag]).page(params[:page]).per_page(6).check_role(current_user)
+      # @listings = Listing.search(params[:search]).page(params[:page]).per_page(6) if params[:search].present?
+      # @listings = Listing.price(params[:price]).page(params[:page]).per_page(6) if params[:price].present?
+            # unless key == "price" && value < 100
+      else
+       @listings = Listing.filter(params.slice(:state, :price)).page(params[:page]).per_page(6).check_role(current_user)
+       end
     end
 
     def new
@@ -96,7 +122,7 @@ class ListingsController < ApplicationController
   		end
   	end
 
-end
-
-
-
+   #  def filtering_params(params)
+   #   params.slice(:price, :state)
+   # end
+ end
