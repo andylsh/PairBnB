@@ -13,13 +13,37 @@ class Listing < ApplicationRecord
 	validates :state, presence: true
 	validates :postcode, presence: true, numericality: { only_integer: true}, length: { is: 5 }
 	validates :price, presence: true, numericality: {greater_than: 0, message: "Must be a positive value"}
+	scope :price, -> (price) {where("price < ?", price)}
+	scope :state, -> (state) {where state: state}
+	
+	# def self.search(search)
+	# 	if search.present?
+	# 		@listing = Listing.where(["state LIKE ?", "%#{search}%"])
+	# 	else
+	# 		@listing = Listing.all
+	# 	end
+	# end
 
-	def self.search(search)
-		if search.present?
-			@listing = Listing.where(["state LIKE ?", "%#{search}%"])
-		else
-			@listing = Listing.all
+
+	def self.check_role(user)
+		if user.superadmin?
+			Listing.all
+		elsif user.moderator?
+			Listing.where(:verification => false)
+		else 
+			Listing.where(:verification => true)
 		end
 	end
+
+	def self.filter(filtering_params)
+	  results= self.where(nil)
+      filtering_params.each do |key, value|
+      	if key == "price" and value.to_i <= 100
+              value = nil
+        end
+        results = results.order("created_at DESC").public_send(key, value) if value.present?
+      end
+      results
+    end
 
 end

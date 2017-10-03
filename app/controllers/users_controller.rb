@@ -33,7 +33,7 @@ class UsersController < Clearance::UsersController
 	end
 
 	def show
-    	@user = User.find(params[:id])
+    	@user = User.find(pa 	rams[:id])
     	render "users/new"
     end
 
