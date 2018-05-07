@@ -52,6 +52,7 @@ gem 'sidekiq'
 gem 'omniauth-facebook'
 gem 'cloudinary'
 gem 'fog'
+gem 'rails_db'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
